@@ -15,9 +15,8 @@ var gulp = require('gulp'), // 基础库
     runSequence = require('run-sequence'), // 按顺序运行多个或多组gulp任务
     browserSync = require('browser-sync'), // 监听项目源文件变更，同步刷新浏览器，支持多浏览器或设置终端
     mainBowerFiles = require('main-bower-files'), // 通过读取并分析bower.json文件里override属性里main路径下定义的插件及相关依赖
-    clean = require('gulp-clean'), // 删除文件或文件夹
     cache = require('gulp-cache'), // 清除缓存
-    del = require('del'),
+    del = require('del'), // 删除文件或文件夹
     cp = require('child_process');
 
 var jekyllCommand = (/^win/.test(process.platform)) ? 'jekyll.bat' : 'jekyll';
@@ -27,14 +26,14 @@ var jekyllCommand = (/^win/.test(process.platform)) ? 'jekyll.bat' : 'jekyll';
  */
 var paths = {
     css: {
-        src: 'src/sass/**/*.scss',
-        dest: 'assets/css/',
-        watch: 'src/sass/**/*.scss'
+        src: 'src/sass',
+        dest: 'assets/css',
+        watch: 'src/sass'
     },
     js: {
-        src: 'src/js/**/*.js',
-        dest: 'assets/js/',
-        watch: 'src/js/**/*.js'
+        src: 'src/js',
+        dest: 'assets/js',
+        watch: 'src/js'
     },
     img: {
         src: 'src/images/**/*.*',
@@ -43,6 +42,10 @@ var paths = {
     }
 };
 
+/**
+ * 
+ * @param {*} e error log
+ */
 function errrHandler(e) {
     // 控制台发声,错误时beep一下
     gutil.beep();
@@ -50,28 +53,49 @@ function errrHandler(e) {
     this.emit('end');
 }
 
-/*
- * Build the Jekyll Site
+/**
+ * Add indicator messages for when build tasks are running
+ */
+var messages = {
+    jekyllDev: 'Running: $ jekyll build for dev',
+    jekyllProd: 'Running: $ jekyll build for prod'
+};
+
+/**
+ * Build the Jekyll Site in development mode
  * runs a child process in node that runs the jekyll commands
  */
-gulp.task('jekyll-build', function (done) {
-    return cp.spawn(jekyllCommand, ['build'], {
+gulp.task('jekyll-dev', function (done) {
+    browserSync.notify(messages.jekyllDev);
+    return cp.spawn('jekyll', ['build', '_config.yml'], {
+            stdio: 'inherit'
+        })
+        .on('close', done);
+});
+
+/**
+ * Build the Jekyll Site in production mode
+ */
+gulp.task('jekyll-prod', function (done) {
+    browserSync.notify(messages.jekyllProd);
+    return cp.spawn('jekyll', ['build'], {
             stdio: 'inherit'
         })
         .on('close', done);
 });
 
 /*
- * Rebuild Jekyll & reload browserSync
+ * Rebuild Jekyll & reload the page
  */
-gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
+gulp.task('jekyll-rebuild', ['jekyll-dev'], function () {
     browserSync.reload();
 });
 
 /*
- * Build the jekyll site and launch browser-sync
+ * Build the Jekyll Site and launch browser - sync
+ * Wait for jekyll-dev task to complete, then launch the Server
  */
-gulp.task('browser-sync', ['jekyll-build'], function () {
+gulp.task('browser-sync', ['jekyll-dev'], function () {
     browserSync({
         server: {
             baseDir: '_site'
@@ -82,27 +106,24 @@ gulp.task('browser-sync', ['jekyll-build'], function () {
 /*
  * Compile js file(bower_components into assets)
  */
-gulp.task('bowerTask', ['clean'], function () {
-    var jsFiles = ['assets/js/*'];
-    var cssFiles = ['assets/css/*'];
-
-    gulp.src(mainBowerFiles().concat(jsFiles))
+gulp.task('bower', function () {
+    gulp.src(mainBowerFiles().concat(paths.js.dest))
         .pipe(gfilter('**/*.js'))
-        // .pipe(concat('main.js'))
+        // .pipe(concat('libs.min.js'))
         // .pipe(uglify())
-        .pipe(gulp.dest('assets/js'));
-    gulp.src(mainBowerFiles().concat(cssFiles))
+        .pipe(gulp.dest(paths.js.dest));
+    gulp.src(mainBowerFiles().concat(paths.css.dest))
         .pipe(gfilter('**/*.css'))
-        // .pipe(concat('main.min.css'))
+        // .pipe(concat('libs.min.css'))
         // .pipe(uglify())
-        .pipe(gulp.dest('assets/css'));
+        .pipe(gulp.dest(paths.css.dest));
 });
 
 /*
  * Compile SASS into CSS and minify CSS 
  */
 gulp.task('sass', function () {
-    gulp.src(paths.css.src)
+    gulp.src(paths.css.src + '/**/*.scss')
         .pipe(plumber({
             errorHandler: errrHandler
         }))
@@ -115,7 +136,7 @@ gulp.task('sass', function () {
  * Compile and minify JS
  */
 gulp.task('js', function () {
-    return gulp.src("src/js/pure.js")
+    return gulp.src(paths.js.src + '/pure.js')
         .pipe(plumber({
             errorHandler: errrHandler
         }))
@@ -125,7 +146,7 @@ gulp.task('js', function () {
 });
 
 /**
- * Minify images 
+ * Minify images
  */
 gulp.task('imagemin', function () {
     gulp.src(paths.img.src)
@@ -152,25 +173,36 @@ gulp.task('imagemin', function () {
  * Removes assets files and folders
  */
 gulp.task('clean', function () {
-    return gulp.src('assets/**/*', {
-            read: false
-        })
-        .pipe(clean());
+    return del('assets/**/*');
 });
 
-gulp.task('clean-cache', function (done) { //清除缓存
-    return cache.clearAll(done);
-});
-
+/**
+ * Watch scss files for changes & recompile.Watch html/md files, run Jekyll & reload BrowserSync
+ */
 gulp.task('watch', function () {
-    gulp.watch(paths.css.watch, ['sass', 'jekyll-rebuild']);
-    gulp.watch(paths.js.watch, ['js']);
-    gulp.watch(['*html', '_includes/*html', '_layouts/*.html'], ['jekyll-rebuild']);
+    gulp.watch(paths.css.watch + '/**/*.scss', ['sass', 'jekyll-rebuild']);
+    gulp.watch(paths.js.watch + '/**/*.js', ['js']);
+    gulp.watch(['*html', '_includes/*html', '_layouts/*.html', '_posts/*'], ['jekyll-rebuild']);
 });
 
+/**
+ * Default task
+ * Running just gulp will compile the js、sass
+ * Compile the Jekyll site, launch BrowserSync & watch files
+ */
 gulp.task('default', function (callback) {
-    runSequence('clean', ['bowerTask', 'imagemin'], ['js', 'sass'],
+    runSequence('clean', ['bower', 'imagemin'], ['js', 'sass'],
         'browser-sync',
         'watch',
+        callback);
+});
+
+/**
+ * Build task
+ * Run using gulp build to compile Sass and Javascript ready for deployment.
+ */
+gulp.task('build', function (callback) {
+    runSequence('clean', ['bower', 'imagemin'], ['js', 'sass'],
+        'jekyll-prod',
         callback);
 });
