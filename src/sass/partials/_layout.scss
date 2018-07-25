@@ -1,0 +1,49 @@
+//***********************************************************************//
+//                         Layout Settings                               //
+//*********************************************************************//
+//--------------------------------------------------------------
+// Supports
+// @media min-width
+// @media max-width
+// @media min-width and max-width
+//--------------------------------------------------------------
+// breakpoints
+$viewport-increment: 0.1px;
+// Desktop
+$desktop: 1200px;
+// customize to suite
+$pre-desktop: $desktop - $viewport-increment;
+// Tablet
+$tablet-portrait: 768px;
+// customize to suite
+$pre-tablet_portrait: $tablet_portrait - $viewport-increment;
+$tablet-landscape: 1024px;
+// customize to suite
+$pre-tablet_landscape: $pre-desktop;
+// Palm
+$palm: 640px;
+// customize to suite
+$post-palm: $palm+$viewport-increment;
+// Constraints
+$min: min-width;
+$max: max-width;
+//***********************************************************************//
+//                           Media Query                               //
+//*********************************************************************//
+@mixin media-query($constraint, $viewport1, $viewport2: null) {
+    @if $constraint==$min {
+        @media screen and ($min: $viewport1) {
+            @content;
+        }
+    }
+    @else if $constraint==$max {
+        @media screen and ($max: $viewport1) {
+            @content;
+        }
+    }
+    @else {
+        @media screen and ($min: $viewport1) and ($max: $viewport2) {
+            @content;
+        }
+    }
+}

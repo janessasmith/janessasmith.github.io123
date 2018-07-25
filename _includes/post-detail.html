@@ -1,0 +1,25 @@
+<div class="post animated fadeInDown">
+    <!-- 列表表头 -->
+    <div class="post-title">
+        <h3>
+            <a href="{{ page.url | prepend: site.baseurl }}" title="{{ page.title }}">{{ page.title }}</a>
+        </h3>
+    </div>
+    <!-- 列表正文 -->
+    <div class="post-content">
+        <div class="p-part">
+            <p>{{ page.content }}</p>
+        </div>
+    </div>
+    <!-- 列表页脚 -->
+    <div class="post-footer">
+        <div class="meta">
+            <div class="info">
+                <i class="fa fa-calendar"></i>
+                <span class="date">{{ page.date | date: "%F" }}</span>
+                <i class="fa fa-comment-o"></i>
+                <a href="">Comments</a>
+            </div>
+        </div>
+    </div>
+</div>

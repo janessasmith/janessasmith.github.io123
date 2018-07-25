@@ -1,0 +1,65 @@
+//***********************************************************************//
+//                         Mixin Settings                               //
+//*********************************************************************//
+//--------------------------------------------------------------
+// Apply a CSS3 font-smoothing
+// @include font-smoothing;
+//--------------------------------------------------------------
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+//--------------------------------------------------------------
+// Box sizing
+// content-box | border-box | padding-box
+// @include boxSizing(border-box);
+//--------------------------------------------------------------
+@mixin box-sizing($sizing) {
+    -webkit-box-sizing: $sizing;
+    box-sizing: $sizing;
+}
+
+//--------------------------------------------------------------
+// Apply a CSS3 transition
+// @include transition($value...);
+// 多组值参数mixin
+//--------------------------------------------------------------
+@mixin transition($value...) {
+    -webkit-transition: $value;
+    -moz-transition: $value;
+    -ms-transition: $value;
+    -o-transition: $value;
+    transition: $value;
+}
+
+//--------------------------------------------------------------
+// Apply a CSS3 transform
+// @include transform($value);
+//--------------------------------------------------------------
+@mixin transform($value) {
+    -webkit-transform: $value;
+    -moz-transform: $value;
+    -ms-transform: $value;
+    -o-transform: $value;
+    transform: $value;
+}
+
+//--------------------------------------------------------------
+// Apply a CSS3 animation
+// @include animation($name, $duration, $mode);
+//--------------------------------------------------------------
+@mixin animation($name, $duration, $mode) {
+    -webkit-animation-name: $name;
+    -moz-animation-name: $name;
+    -o-animation-name: $name;
+    animation-name: $name;
+    -webkit-animation-duration: $duration;
+    -moz-animation-duration: $duration;
+    -o-animation-duration: $duration;
+    animation-duration: $duration;
+    -webkit-animation-fill-mode: $mode;
+    -moz-animation-fill-mode: $mode;
+    -o-animation-fill-mode: $mode;
+    animation-fill-mode: $mode;
+}

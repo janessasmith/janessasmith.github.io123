@@ -1,0 +1,27 @@
+{% for post in site.posts %}
+<div class="post animated fadeInDown">
+    <!-- 列表表头 -->
+    <div class="post-title">
+        <h3>
+            <a href="{{ post.url | prepend: site.baseurl }}" title="{{ post.title }}">{{ post.title }}</a>
+        </h3>
+    </div>
+    <!-- 列表正文 -->
+    <div class="post-content">
+        <div class="p-part">
+            <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 126}}</p>
+        </div>
+    </div>
+    <!-- 列表页脚 -->
+    <div class="post-footer">
+        <div class="meta">
+            <div class="info">
+                <i class="fa fa-calendar"></i>
+                <span class="date">{{ post.date | date: "%F" }}</span>
+                <i class="fa fa-comment-o"></i>
+                <a href="">Comments</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

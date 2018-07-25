@@ -1,0 +1,33 @@
+<div class="sidebar animated fadeInDown">
+    <!-- 自我简介 -->
+    <div class="intro">
+        <div class="logo">
+            <img src="/assets/images/logo@3x.jpg">
+            <h3 title="{{ site.author }}">
+                <a href="{{ site.url }}"></a>
+            </h3>
+            <div class="description">
+                <p>{{ site.description }}</p>
+            </div>
+        </div>
+    </div>
+    <!-- 社交网络 -->
+    {% if site.sns.size > 0 %}
+    <ul class="social-links">
+        {% for s in site.sns %}
+        <li>
+            <a href="{{ s[1]}}" target="_blank">
+                <i class="fa fa-{{ s[0]}}"></i>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <!-- 访问量 -->
+    <div class="footer">
+        <span>
+            Coding by
+            <a target="_blank" href="http://None">Hazel</a>
+        </span>
+    </div>
+</div>

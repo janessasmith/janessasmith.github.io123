@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+{% include meta.html %}
+
+<body>
+    {{ content }}
+    <!-- JS载入 -->
+    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.appear.js"></script>
+    <script type="text/javascript" src="/assets/js/prism.js"></script>
+    <script type="text/javascript" src="/assets/js/pure.min.js"></script>
+    <!-- 百度站点分析 -->
+    <div class="analysis">
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?42da34bc287b122ce843ef2151c75b2a";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </div>
+</body>
+
+</html>
