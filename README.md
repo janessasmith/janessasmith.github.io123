@@ -18,7 +18,7 @@ Using your smartphone to scan the QR Code
 #### CN
 
 - 代码高亮
-- Disqus评论系统
+- Valine评论系统
 - 响应式设计
 - 社交图标
 - Gulp
@@ -27,7 +27,7 @@ Using your smartphone to scan the QR Code
 #### EN
 
 - Code highlight
-- Disqus Comment System
+- Valine Comment System
 - Responsive design
 - SNS Icon
 - Gulp
@@ -104,3 +104,34 @@ In order to compile the assets and run Jekyll on local you need to follow those 
 - Go
 - Python
 - 等
+
+#### Valine评论系统
+
+这里推荐三种第三方社交评论插件：
+- [Disqus](https://disqus.com/)：可惜已被墙
+- [Gitment](https://imsun.github.io/gitment/)：基于github的issue实现，但需要用github账号登录
+- [Valine](https://valine.js.org/)：Valine依赖于Leancloud的后端服务，需要注册账号，且免费版对API请求有限制，有文章阅读量统计相关功能。
+
+最终采用Valine，其特点：
+
+- 无后端实现
+- 高速，使用国内后端云服务提供商 LeanCloud 提供的存储服务
+- 开源，自定义程度高
+- 支持邮件通知
+- 支持验证码
+- 支持Markdown
+
+在配置文件 `_config.yml` 中找到Valine的相关配置。
+
+```
+# Comments 评论功能
+Valine:
+    el: 'xxx' #Valine 的初始化挂载器。可以是一个CSS 选择器，也可以是一个实际的HTML元素
+    appid: 'xxx' #Leancloud应用的appId
+    appkey: 'xxx' #Leancloud应用的appKey
+    verify: false #验证码 默认false
+    notify: true #评论回复提醒 默认false
+    placeholder: 'ヾﾉ≧∀≦) Just go go~' #评论框占位符
+```
+
+详细使用和配置，可参考文档：[Valine官网文档](https://valine.js.org/)、[Valine配置介绍一](https://panjunwen.com/diy-a-comment-system/)、[Valine配置介绍二](https://www.xxwhite.com/2017/Valine.html)

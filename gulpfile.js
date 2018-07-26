@@ -136,11 +136,11 @@ gulp.task('sass', function () {
  * Compile and minify JS
  */
 gulp.task('js', function () {
-    return gulp.src(paths.js.src + '/pure.js')
+    return gulp.src(paths.js.src + '/*.js')
         .pipe(plumber({
             errorHandler: errrHandler
         }))
-        .pipe(concat('pure.min.js'))
+        // .pipe(concat('pure.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(paths.js.dest));
 });

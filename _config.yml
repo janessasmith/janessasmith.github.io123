@@ -11,7 +11,7 @@ baseurl: ''
 author: 'zhenglu'
 nickname: 'janessasmith'
 bio: ''
-avatar: ''
+avatar: '/assets/images/avatar.jpg'
 
 # SNS settings 配置社交网站
 sns:
@@ -24,9 +24,13 @@ sns:
 search: true
 
 # Comments 评论功能
-comments:
-    disqus: false
-    disqus_url: ''
+Valine:
+    el: 'comment-valine'
+    appid: 'P7kjzNADK7TUXDpYqbXFjCNI-gzGzoHsz' #Leancloud应用的appId
+    appkey: 'tggnWSOKcCk9sbLNTU6QJGvU' #Leancloud应用的appKey
+    verify: false #验证码
+    notify: true #评论回复提醒
+    placeholder: 'ヾﾉ≧∀≦) Just go go~' #评论框占位符
 
 # Build settings
 paginate: 6
