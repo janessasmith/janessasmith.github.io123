@@ -40,7 +40,7 @@
         "prism": {
             "main": [
                 "prism.js",
-                "themes/prism.css"
+                "themes/prism-tomorrow.css"
             ]
         }
     }

@@ -466,37 +466,37 @@ a:active {
             border: none;
             border-bottom: 1px solid $border1;
         }
-        code,
-        tt {
-            padding: 2px 4px;
-            font-size: 1.2rem;
-            font-family: $secondary-font, $primary-font;
-            white-space: pre-wrap;
-            color: $light5;
-            background-color: $light3;
-            border-radius: 4px;
-        }
-        pre {
-            @include box-sizing(border-box);
-            width: 100%;
-            margin: 1.6rem 0;
-            padding: 10px;
-            font-size: 1.2rem;
-            font-family: $secondary-font, $primary-font;
-            white-space: pre;
-            overflow: auto;
-            background-color: $light2;
-            border: 1px solid $border2;
-            border-radius: 3px;
-        }
-        pre code,
-        tt {
-            font-size: 1.2rem;
-            white-space: -moz-pre-wrap;
-            white-space: pre-wrap;
-            color: $dark1;
-            background: transparent;
-        }
+        // code,
+        // tt {
+        //     padding: 2px 4px;
+        //     font-size: 1.2rem;
+        //     font-family: $secondary-font, $primary-font;
+        //     white-space: pre-wrap;
+        //     color: $light5;
+        //     background-color: $light3;
+        //     border-radius: 4px;
+        // }
+        // pre {
+        //     @include box-sizing(border-box);
+        //     width: 100%;
+        //     margin: 1.6rem 0;
+        //     padding: 10px;
+        //     font-size: 1.2rem;
+        //     font-family: $secondary-font, $primary-font;
+        //     white-space: pre;
+        //     overflow: auto;
+        //     background-color: $light2;
+        //     border: 1px solid $border2;
+        //     border-radius: 3px;
+        // }
+        // pre code,
+        // tt {
+        //     font-size: 1.2rem;
+        //     white-space: -moz-pre-wrap;
+        //     white-space: pre-wrap;
+        //     color: $dark1;
+        //     background: transparent;
+        // }
         .toc {
             ul {
                 list-style: none;

@@ -61,3 +61,46 @@ In order to compile the assets and run Jekyll on local you need to follow those 
 - Run `npm install`
 - Run `bower install`
 - Run `gulp`
+
+#### 代码高亮
+
+模板引入了[Prism.js](http://prismjs.com)，一款轻量、可扩展的代码语法高亮库。主题采用的是tomorrow。
+
+很多知名网站如[react](https://reactjs.org/)、[MDN](https://developer.mozilla.org/)、[css-tricks](https://css-tricks.com/)也在用它，就连 JavaScript 之父 [Brendan Eich](https://brendaneich.com/) 也在个人博客上使用。
+
+遵循 [HTML5](https://www.w3.org/TR/html5/grouping-content.html#the-pre-element) 标准，Prism 使用语义化的 `<pre>` 元素和 `<code>` 元素来标记代码区块：
+
+```
+<pre><code class="language-css">p { color: red }</code></pre>
+```
+
+在Markdown中你可以这样写：
+
+	 ```css
+	    p { color: red }
+	 ```
+
+     ```javascript
+		var Prism = require('prismjs');
+        // The code snippet you want to highlight, as a string
+        var code = "var data = 1;";
+        // Returns a highlighted HTML string
+        var html = Prism.highlight(code, Prism.languages.javascript, 'javascript');
+	 ```
+
+支持语言：
+
+- HTML
+- CSS
+- Sass
+- Less
+- JavaScript
+- JSON
+- CoffeeScript
+- Java
+- C-like
+- Swift
+- PHP
+- Go
+- Python
+- 等

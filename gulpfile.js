@@ -67,7 +67,7 @@ var messages = {
  */
 gulp.task('jekyll-dev', function (done) {
     browserSync.notify(messages.jekyllDev);
-    return cp.spawn('jekyll', ['build', '_config.yml'], {
+    return cp.spawn('jekyll', ['build', 'bower.json', '_config.yml'], {
             stdio: 'inherit'
         })
         .on('close', done);
@@ -123,7 +123,7 @@ gulp.task('bower', function () {
  * Compile SASS into CSS and minify CSS 
  */
 gulp.task('sass', function () {
-    gulp.src(paths.css.src + '/**/*.scss')
+    gulp.src(paths.css.src + '/pure.scss')
         .pipe(plumber({
             errorHandler: errrHandler
         }))
