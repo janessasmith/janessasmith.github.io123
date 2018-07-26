@@ -6,6 +6,12 @@
 
 If you like this theme or using it, please give a ⭐️ for motivation ;)
 
+如果想体验手机浏览效果，可以扫一下二维码：
+
+![](screenshot/qr-code.png)
+
+Using your smartphone to scan the QR Code
+
 
 ### Features 特性
 
