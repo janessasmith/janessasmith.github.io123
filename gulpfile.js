@@ -16,6 +16,7 @@ var gulp = require('gulp'), // 基础库
     browserSync = require('browser-sync'), // 监听项目源文件变更，同步刷新浏览器，支持多浏览器或设置终端
     mainBowerFiles = require('main-bower-files'), // 通过读取并分析bower.json文件里override属性里main路径下定义的插件及相关依赖
     cache = require('gulp-cache'), // 清除缓存
+    base64 = require('gulp-base64'), // 将小图背景图转为base64的形式
     del = require('del'), // 删除文件或文件夹
     cp = require('child_process');
 
@@ -129,6 +130,14 @@ gulp.task('sass', function () {
         }))
         .pipe(sass())
         .pipe(csso())
+        .pipe(base64({
+            baseDir: 'public',
+            extensions: ['svg', 'png', /\.jpg#datauri$/i],
+            exclude: [/\.server\.(com|net)\/dynamic\//, '--live.jpg'],
+            maxImageSize: 8 * 1024, // 小于8k的图转为base64
+            deleteAfterEncoding: false,
+            debug: true
+        }))
         .pipe(gulp.dest(paths.css.dest));
 });
 
