@@ -1,0 +1,15 @@
+<!-- Leancloud 操作库 -->
+<script type="text/javascript" src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!-- Valine 的核心代码库 -->
+<script type="text/javascript" src="/assets/js/Valine.min.js"></script>
+<script type="text/javascript">
+    new Valine({
+        av: AV, // 引入av-min.js
+        el: '.{{ site.Valine.el }}',
+        app_id: '{{ site.Valine.appid }}',
+        app_key: '{{ site.Valine.appkey }}',
+        verify: '{{ site.Valine.verify }}',
+        notify: '{{ site.Valine.notify }}',
+        placeholder: '{{ site.Valine.placeholder }}',
+    });
+</script>

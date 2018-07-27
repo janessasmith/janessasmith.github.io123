@@ -10,35 +10,11 @@
     <script type="text/javascript" src="/assets/js/jquery.appear.js"></script>
     <script type="text/javascript" src="/assets/js/prism.js"></script>
     <script type="text/javascript" src="/assets/js/pure.js"></script>
-    <!--Leancloud 操作库:-->
-    <script type="text/javascript" src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <!-- 网站访问量 -->
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <!--Valine 的核心代码库-->
-    <script type="text/javascript" src="/assets/js/Valine.min.js"></script>
-    <script type="text/javascript">
-        new Valine({
-            av: AV, // 引入av-min.js
-            el: '.{{ site.Valine.el }}',
-            app_id: '{{ site.Valine.appid }}',
-            app_key: '{{ site.Valine.appkey }}',
-            verify: '{{ site.Valine.verify }}',
-            notify: '{{ site.Valine.notify }}',
-            placeholder: '{{ site.Valine.placeholder }}',
-        });
-    </script>
+    <!-- Valine 评论 -->
+    {% include valine.html %}
     <!-- 百度站点分析 -->
-    <div class="analysis">
-        <script>
-            var _hmt = _hmt || [];
-            (function () {
-                var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?2af707459a77542d75fd525575b84824";
-                var s = document.getElementsByTagName("script")[0];
-                s.parentNode.insertBefore(hm, s);
-            })();
-        </script>
-    </div>
+    {% include baidu-analytics.html %}
+
 </body>
 
 </html>

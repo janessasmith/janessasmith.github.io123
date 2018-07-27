@@ -32,6 +32,9 @@ Valine:
     notify: true #评论回复提醒
     placeholder: 'ヾﾉ≧∀≦) Just go go~' #评论框占位符
 
+# Baidu analytics 百度统计
+baidu-analytics: '2af707459a77542d75fd525575b84824'
+
 # Build settings
 paginate: 6
 paginate_path: 'page:num'
